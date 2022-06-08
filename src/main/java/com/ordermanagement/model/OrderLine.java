@@ -7,18 +7,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 @Entity
 @Table(name = "orderLine")
 public class OrderLine {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	@ManyToOne
+	@JoinColumn(name = "order_id")
+	private Order order;
+	@OneToMany
+	@JoinColumn(name = "orderLine_id")
 	private List<OrderItem> items;
 	private Date eta;
 	private OrderLineStatus statusLine;
+	@OneToMany
+	@JoinColumn(name = "address_id")
 	private List<Address> addresses;
 	public int getId() {
 		return id;

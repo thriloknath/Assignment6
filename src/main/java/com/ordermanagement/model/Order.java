@@ -7,9 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,6 +19,8 @@ public class Order {
 	private Date orderDate;
 	private float totalAmount;
 	private Status status;
+	@OneToMany
+	@JoinColumn(name = "order_id")
 	private List<OrderLine> orderLine;
 
 	public int getOrderId() {
